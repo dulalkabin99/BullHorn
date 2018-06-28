@@ -11,44 +11,46 @@ import javax.validation.Valid;
 
 @Controller
 public class HomeController {
+
+
     @Autowired
     ContentRepo contentRepo;
 
     @RequestMapping("/")
-    public String contentList(Model model){
+    public String contentList(Model model) {
         model.addAttribute("contents", contentRepo.findAll());
         return "contentlist";
 
     }
 
-     @GetMapping("/add")
-    public String form(Model model){
-        model.addAttribute("content", new Bullhorn());
+    @GetMapping("/add")
+    public String messageForm(Model model) {
+        model.addAttribute("bullhorn", new Bullhorn());
         return "addform";
-     }
+    }
 
-     @PostMapping("/process")
-    public String processForm(@Valid @ModelAttribute Bullhorn bullhorn, BindingResult result){
-        if(result.hasErrors()){
+    @PostMapping("/process")
+    public String processForm(@Valid @ModelAttribute("bullhorn") Bullhorn bullhorn, BindingResult result) {
+        if (result.hasErrors()) {
             return "addform";
         }
         contentRepo.save(bullhorn);
         return "redirect:/";
 
-     }
+    }
 
-     @RequestMapping("/detail/{id}")
-    public String showDetail(@PathVariable("id") long id, Model model){
-    model.addAttribute("content", contentRepo.findById(id));
+    @RequestMapping("/detail/{id}")
+    public String showDetail(@PathVariable("id") long id, Model model) {
+        model.addAttribute("content", contentRepo.findById(id).get());
         return "details";
-     }
+    }
 
-     @RequestMapping("/update/{id}")
-    public String updateContent(@PathVariable("id") long id, Model model){
-         model.addAttribute("content", contentRepo.findById(id));
-         return "addform";
+    @RequestMapping("/update/{id}")
+    public String updateContent(@PathVariable("id") long id, Model model) {
+        model.addAttribute("bullhorn", contentRepo.findById(id));
+        return "addform";
 
 
-     }
+    }
 
 }

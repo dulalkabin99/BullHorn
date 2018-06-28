@@ -3,10 +3,42 @@
 <head>
     <meta charset=" UTF-8"/>
     <title>Title</title>
+
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
 </head>
 
 <body>
+<div th:replace="base :: navlinks"></div>
+<div>
+<form action="#" th:action="@{/process}"
+      th:object="${bullhorn}" method="post">
+
+    <input type="hidden" th:field="*{id}"/>
+    Login: <input type="text" th:field="*{sentBy}"/>
+    <span th:if="${#fields.hasErrors('sentBy')}" th:errors="*{sentBy}"></span><br/>
+
+    Title: <input type="text" th:field="*{title}"/>
+    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span><br/>
+
+    Message <textarea rows="3" th:field="*{content}"></textarea>
+    <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span><br/>
+
+    Date: <input type="text" id="datepicker" th:field="*{date}"/><br/>
+
+    <input type="submit" value="Submit" />
+</form>
+</div>
 
 
+<div th:replace="base :: footer"></div>
 </body>
 </html>

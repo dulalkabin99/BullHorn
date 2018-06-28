@@ -6,7 +6,24 @@
 </head>
 
 <body>
-
-
+<div th:replace="base :: navlinks"></div>
+<table>
+    <tr>
+        <th>Content Title &nbsp  &nbsp</th>
+        <th>Posted Date  &nbsp  &nbsp</th>
+        <th> Sent By  &nbsp  &nbsp</th>
+        <td>Actions</td>
+    </tr>
+    <tr th:each="message : ${contents}">
+        <td th:text="${message.title}"></td>
+        <td th:text="${message.date}"></td>
+        <td th:text="${message.sentBy}"></td>
+        <td>
+            <a th:href="@{/update/{id} (id=${message.id})}"> Update Content</a>
+            <a th:href="@{/detail/{id} (id=${message.id})}"> View Detail </a>
+        </td>
+    </tr>
+</table>
+<div th:replace="base :: footer"></div>
 </body>
 </html>

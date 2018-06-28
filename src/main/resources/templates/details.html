@@ -6,6 +6,16 @@
 </head>
 
 <body>
+<div th:replace="base :: navlinks"></div>
+<div>
+    <p><strong>[[${content.title}]]</strong> </p>
+    <p>By: [[${content.sentBy}]] - [[${content.date}]]</p>
+    <p>-----------------------------------------------</p>
+    <p>[[${content.content}]]</p>
+
+</div>
+
+<div th:replace="base :: footer"></div>
 
 
 </body>
