@@ -29,9 +29,17 @@ public class Bullhorn {
     @Size(min=4)
     private String title;
 
+  private String headshot;
 
+  public String getHeadshot() {
+    return headshot;
+  }
 
-    public long getId() {
+  public void setHeadshot(String headshot) {
+    this.headshot = headshot;
+  }
+
+  public long getId() {
         return id;
     }
 
